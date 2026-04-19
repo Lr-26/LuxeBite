@@ -1,13 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
+// Forzamos la base a '/' para que funcione correctamente tanto en Vercel como en Localhost sin subcarpetas.
 export default defineConfig({
-  base: process.env.VERCEL ? '/' : '/luxe-bite/',
+  base: '/',
   plugins: [react()],
   server: {
+    port: 5177,
     proxy: {
       '/api': 'http://localhost:5001'
     }
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true
   }
 })
