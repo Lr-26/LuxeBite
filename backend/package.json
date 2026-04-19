@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Professional Restaurant Backend",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "npx tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
