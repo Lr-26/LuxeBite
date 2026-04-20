@@ -1,9 +1,7 @@
 {
-  "name": "luxebite-master",
+  "name": "luxebite",
   "version": "1.0.0",
   "scripts": {
-    "install-all": "npm install --prefix frontend",
-    "build": "npm run build --prefix frontend",
-    "vercel-install": "npm install --prefix frontend"
+    "vercel-build": "cd frontend && npm install && npm run build"
   }
 }
