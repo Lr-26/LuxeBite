@@ -1,9 +1,7 @@
 {
   "version": 2,
+  "outputDirectory": "frontend/dist",
   "rewrites": [
-    { "source": "/api/menu", "destination": "/api/menu.ts" },
-    { "source": "/api/reserve", "destination": "/api/reserve.ts" },
-    { "source": "/(.*)", "destination": "/frontend/dist/$1", "continue": true },
-    { "source": "/(.*)", "destination": "/frontend/dist/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
