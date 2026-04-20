@@ -282,15 +282,9 @@ const Menu = () => {
   const [menu, setMenu] = useState<MenuData | null>(null);
 
   useEffect(() => {
-    // Intentamos traer el menú de la API real
-    fetch(`/api/menu?lang=${lang}`)
-      .then(res => res.json())
-      .then(data => setMenu(data))
-      .catch(err => {
-        console.warn("Backend no disponible, usando datos locales de emergencia.", err);
-        setMenu(MENU_DATA[lang] as MenuData);
-      });
+    setMenu(MENU_DATA[lang] as MenuData);
   }, [lang]);
+
 
   if (!menu) return (
     <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#000', color: '#fff' }}>
