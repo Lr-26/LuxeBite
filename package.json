@@ -1,13 +1,9 @@
 {
-  "name": "restaurante-project",
+  "name": "luxebite-master",
   "version": "1.0.0",
   "scripts": {
-    "install-all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "build": "npm run build --prefix frontend && cp -r frontend/dist ./dist",
-    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
-    "start": "npm run dev"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
+    "install-all": "npm install --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "vercel-install": "npm install --prefix frontend"
   }
 }
