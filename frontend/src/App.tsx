@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, MapPin, Instagram, Facebook, Clock, Award, Star } from 'lucide-react';
+import { Phone, MapPin, Instagram, Facebook, Clock, Award, Star, Menu as MenuIcon, X } from 'lucide-react';
 import './index.css';
 
 type Language = 'en' | 'es';
@@ -179,25 +179,74 @@ const textReveal = {
 
 const Navigation = () => {
   const { lang, toggleLang, t } = useLang();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isOpen]);
+
+  // Handle link click - closes the menu
+  const closeMenu = () => setIsOpen(false);
+
   return (
-    <header style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '2rem 3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100 }}>
-      <Link to="/" style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '800', fontFamily: 'var(--font-bold)', letterSpacing: '4px', textTransform: 'uppercase', lineHeight: '1' }}>
-        VIV<br/>AIA<br/><span style={{fontSize: '0.5rem', letterSpacing: '1px', fontWeight: '400'}}>RESTAURANT</span>
-      </Link>
-      <nav style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
-        <Link to="/menu" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600' }}>{t.nav_food}</Link>
-        <Link to="/gallery" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600' }}>{t.nav_gallery}</Link>
-        <Link to="/reservations" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600' }}>{t.nav_contact}</Link>
-        
-        <div style={{ marginLeft: '1rem', width: '50px', height: '50px', background: 'var(--primary)', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
-          <svg fill="none" stroke="#fff" strokeWidth="2" viewBox="0 0 24 24" width="20" height="20"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+    <>
+      <header style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '2rem 3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100 }}>
+        <Link to="/" onClick={closeMenu} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '800', fontFamily: 'var(--font-bold)', letterSpacing: '4px', textTransform: 'uppercase', lineHeight: '1', zIndex: 101 }}>
+          VIV<br/>AIA<br/><span style={{fontSize: '0.5rem', letterSpacing: '1px', fontWeight: '400'}}>RESTAURANT</span>
+        </Link>
+        <nav className="nav-desktop" style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
+          <Link to="/menu" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600' }}>{t.nav_food}</Link>
+          <Link to="/gallery" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600' }}>{t.nav_gallery}</Link>
+          <Link to="/reservations" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600' }}>{t.nav_contact}</Link>
+          
+          <div style={{ marginLeft: '1rem', width: '50px', height: '50px', background: 'var(--primary)', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer' }}>
+            <svg fill="none" stroke="#fff" strokeWidth="2" viewBox="0 0 24 24" width="20" height="20"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          
+          <button onClick={toggleLang} style={{ background: 'transparent', color: '#fff', border: '1px solid #fff', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem', fontWeight: 'bold' }}>
+            {lang === 'en' ? 'ES' : 'EN'}
+          </button>
+        </nav>
+
+        {/* Mobile Toggle Button */}
+        <div className="nav-mobile-toggle" style={{ display: 'none', zIndex: 101, gap: '1rem', alignItems: 'center' }}>
+          <button onClick={toggleLang} style={{ background: 'transparent', color: '#fff', border: '1px solid #fff', padding: '4px 8px', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 'bold' }}>
+            {lang === 'en' ? 'ES' : 'EN'}
+          </button>
+          <button onClick={() => setIsOpen(!isOpen)} style={{ background: 'transparent', color: '#fff', border: 'none', padding: 0 }}>
+            {isOpen ? <X size={30} /> : <MenuIcon size={30} />}
+          </button>
         </div>
-        
-        <button onClick={toggleLang} style={{ background: 'transparent', color: '#fff', border: '1px solid #fff', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem', fontWeight: 'bold' }}>
-          {lang === 'en' ? 'ES' : 'EN'}
-        </button>
-      </nav>
-    </header>
+      </header>
+
+      {/* Mobile Menu Fullscreen Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            className="mobile-menu-overlay"
+            initial={{ opacity: 0, y: '-100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-100%' }}
+            transition={{ type: 'tween', duration: 0.4 }}
+          >
+            <Link to="/" onClick={closeMenu}>Inicio</Link>
+            <Link to="/menu" onClick={closeMenu}>{t.nav_food}</Link>
+            <Link to="/gallery" onClick={closeMenu}>{t.nav_gallery}</Link>
+            <Link to="/reservations" onClick={closeMenu}>{t.nav_contact}</Link>
+            
+            <div style={{ display: 'flex', gap: '2rem', marginTop: '3rem' }}>
+              <a href="#"><Instagram size={24} /></a>
+              <a href="#"><Facebook size={24} /></a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
