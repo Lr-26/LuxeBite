@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, MapPin, Instagram, Facebook, Clock, Award, Star } from 'lucide-react';
@@ -279,7 +279,26 @@ const Home = () => {
 const Menu = () => {
   const { t, lang } = useLang();
   const [showWines, setShowWines] = useState(false);
-  const menu = MENU_DATA[lang] as MenuData;
+  const [menu, setMenu] = useState<MenuData | null>(null);
+
+  useEffect(() => {
+    // Intentamos traer el menú de la API real
+    fetch(`/api/menu?lang=${lang}`)
+      .then(res => res.json())
+      .then(data => setMenu(data))
+      .catch(err => {
+        console.warn("Backend no disponible, usando datos locales de emergencia.", err);
+        setMenu(MENU_DATA[lang] as MenuData);
+      });
+  }, [lang]);
+
+  if (!menu) return (
+    <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', background: '#000', color: '#fff' }}>
+      <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ repeat: Infinity, duration: 1.5 }}>
+        Cargando Experiencia Culinaria...
+      </motion.div>
+    </div>
+  );
 
   return (
     <>
