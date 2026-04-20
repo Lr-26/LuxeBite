@@ -311,19 +311,41 @@ const Menu = () => {
              <div style={{ width: '80px', height: '2px', background: 'var(--primary)', margin: '2rem auto' }}></div>
           </motion.div>
 
-          <motion.div className="tasting-menu-card glass" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} style={{ margin: '0 auto 8rem', padding: '4.5rem', maxWidth: '1000px', textAlign: 'center', border: '1px solid rgba(201, 160, 80, 0.4)', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: '20px', left: '20px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '12px', textTransform: 'uppercase' }}>Signature</div>
-            <span style={{ color: 'var(--primary)', letterSpacing: '8px', textTransform: 'uppercase', fontSize: '1rem', fontWeight: 600 }}>{t.tasting_menu_subtitle}</span>
-            <h2 style={{ fontSize: '4rem', color: '#fff', margin: '1.5rem 0', fontFamily: 'serif', fontStyle: 'italic' }}>{t.tasting_menu_title}</h2>
-            <p style={{ color: '#aaa', maxWidth: '700px', margin: '0 auto 3.5rem', fontSize: '1.2rem', lineHeight: '1.8' }}>{t.tasting_menu_desc}</p>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4rem', fontWeight: '800', borderTop: '1px solid rgba(201, 160, 80, 0.15)', paddingTop: '3rem' }}>
-              <div className="gold-text" style={{ fontSize: '1.8rem' }}>${t.tasting_menu_price}</div>
-              <div style={{ width: '1px', height: '50px', background: 'rgba(255,255,255,0.1)' }}></div>
-              <div style={{ color: '#fff', fontSize: '1.2rem' }}>{t.tasting_menu_pairing}</div>
+          <motion.div 
+            className="tasting-menu-card" 
+            initial={{ opacity: 0, y: 30 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            style={{ 
+              margin: '0 auto 8rem', 
+              padding: '4rem', 
+              maxWidth: '1000px', 
+              textAlign: 'center', 
+              border: '1px solid rgba(201, 160, 80, 0.4)', 
+              background: 'rgba(255, 255, 255, 0.03)',
+              backdropFilter: 'blur(10px)',
+              borderRadius: '30px',
+              position: 'relative', 
+              overflow: 'hidden' 
+            }}
+          >
+            <div style={{ position: 'absolute', top: '20px', left: '20px', fontSize: '0.6rem', color: 'rgba(201, 160, 80, 0.5)', letterSpacing: '8px', textTransform: 'uppercase' }}>Signature Series</div>
+            <motion.span 
+              initial={{ opacity: 0 }} 
+              whileInView={{ opacity: 1 }}
+              style={{ color: 'var(--primary)', letterSpacing: '8px', textTransform: 'uppercase', fontSize: '0.9rem', fontWeight: 600 }}
+            >
+              {t.tasting_menu_subtitle}
+            </motion.span>
+            <h2 style={{ fontSize: '4rem', color: '#fff', margin: '1.5rem 0', fontFamily: 'serif', fontStyle: 'italic', letterSpacing: '-1px' }}>{t.tasting_menu_title}</h2>
+            <p style={{ color: '#aaa', maxWidth: '700px', margin: '0 auto 3.5rem', fontSize: '1.1rem', lineHeight: '1.8' }}>{t.tasting_menu_desc}</p>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '3rem', borderTop: '1px solid rgba(201, 160, 80, 0.15)', paddingTop: '3rem' }}>
+              <div className="gold-text" style={{ fontSize: '2rem', fontWeight: '800' }}>{t.tasting_menu_price}</div>
+              <div style={{ width: '1px', height: '40px', background: 'rgba(255,255,255,0.1)' }}></div>
+              <div style={{ color: '#fff', fontSize: '1rem', letterSpacing: '1px' }}>{t.tasting_menu_pairing}</div>
             </div>
           </motion.div>
 
-          <div className="trifold-menu" style={{ background: 'transparent', padding: 0, borderRadius: 0 }}>
+          <div className="trifold-menu">
             {/* Column 1: Starters */}
             <div className="menu-col glass" style={{ padding: '3rem', border: '1px solid rgba(255,255,255,0.05)' }}>
               <h3 className="gold-text" style={{ fontSize: '1rem', letterSpacing: '5px', textTransform: 'uppercase', marginBottom: '3rem', textAlign: 'center' }}>{t.menu_starters}</h3>
