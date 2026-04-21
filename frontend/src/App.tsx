@@ -195,23 +195,12 @@ const Navigation = () => {
 
   return (
     <>
-      <header style={{ 
-        position: 'fixed', 
-        top: 0, left: 0, right: 0, 
-        padding: '1.5rem 3rem', 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
-        zIndex: 1000,
-        background: 'rgba(10, 10, 10, 0.4)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(201, 160, 80, 0.3)',
-        boxShadow: '0 10px 40px rgba(0, 0, 0, 0.5)'
-      }}>
-        <Link to="/" onClick={closeMenu} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '800', fontFamily: 'var(--font-bold)', letterSpacing: '4px', textTransform: 'uppercase', lineHeight: '1', zIndex: 101 }}>
-          VIV<br/>AIA<br/><span style={{fontSize: '0.5rem', letterSpacing: '1px', fontWeight: '400'}}>RESTAURANT</span>
-        </Link>
+      <header className="luxe-header">
+        <div className="logo-container">
+          <Link to="/" onClick={closeMenu} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.2rem', fontWeight: '800', fontFamily: 'var(--font-bold)', letterSpacing: '4px', textTransform: 'uppercase', lineHeight: '1', zIndex: 101, display: 'block' }}>
+            VIV<br/>AIA<br/><span style={{fontSize: '0.5rem', letterSpacing: '1px', fontWeight: '400'}}>RESTAURANT</span>
+          </Link>
+        </div>
         <nav className="nav-desktop" style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
           <Link to="/menu" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600' }}>{t.nav_food}</Link>
           <Link to="/gallery" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.8rem', fontWeight: '600' }}>{t.nav_gallery}</Link>

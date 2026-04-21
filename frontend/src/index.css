@@ -238,6 +238,24 @@ h3 {
   font-weight: 300;
 }
 
+.luxe-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201, 160, 80, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
 nav.minimal {
   position: absolute;
   top: 3rem;
@@ -820,17 +838,18 @@ button:hover {
 
 @media (max-width: 1100px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .hero-triptych { display: none; } /* On smaller screens, simplify hero */
-  .hero-text-pane { padding: 10% 8%; text-align: center; }
+  .hero-triptych { display: none !important; }
+  .hero-text-pane { padding: 10% 8% !important; text-align: center; }
   .hero-text-pane p { margin: 0 auto 2.5rem; }
   .hero-text-pane h1 { font-size: 4.5rem; }
   .social-horizontal, .vertical-text, .social-vertical { display: none !important; }
 }
 
 @media (max-width: 900px) {
+  .luxe-header { padding: 1rem 1.5rem !important; }
   .trifold-menu { grid-template-columns: 1fr; gap: 4rem; padding: 2rem 1rem; }
   .menu-col.dark-col { margin-top: 0; padding: 4rem 1.5rem 2rem 1.5rem; }
-  .dark-col .menu-circle-img { margin-top: -6rem; width: 180px; height: 180px; }
+  .dark-col .menu-circle-img { margin-top: -6rem; width: 180px !important; height: 180px !important; }
   .hero-text-pane h1 { font-size: 3.5rem; }
   .hero-text-pane .smaller-text { font-size: 1.8rem; }
   .tasting-menu-card { padding: 2rem 1rem !important; }
@@ -840,6 +859,7 @@ button:hover {
 @media (max-width: 768px) {
   .nav-desktop { display: none !important; }
   .nav-mobile-toggle { display: flex !important; }
+  .luxe-header .logo-container { transform: scale(0.85); transform-origin: left center; }
   
   .hero-text-pane h1 { font-size: 3rem; }
   .hero-text-pane .btn-outline { width: 100%; text-align: center; margin-bottom: 1rem; }
